@@ -77,12 +77,12 @@ The pipelines can be broken into 2 main categories, CI and CD.
 
 CI or continues intergration is a pipeline that integrates into Version Control software like git. It triggers on a specific action such as making a PR, That way github then creates a virtual server which downloads all the dependencies and runs tests such as unit tests, and Integration tests. then it gives a checkmark or a red crossmark next to the PR showing us if the tests passed or if they failed, This ensures all functionality of the app is working and that no functionality broke due to our changes. This only leaves checking the implementation for Tawona and Live testing, while not having to worry about if the changes effect the apps in unknown ways
 
-![[Screenshot_20231116_154534.png]]
+![Commit_demo](https://juan-lukeetapath.github.io/images/Commit.png)
 
 CD or continues delivery is a pipeline that also integrates into git, Github creates a virtual server which can download the dependencies and build the Android APK and IOS archive concurrently based on the code in the repo, additional we have it tag the code with a version, and communicates with Heroku (or any other service we use to deploy) that it should start deploying this new tagged version on specific environments. This means we can ensure the code that is being built has all the right configurations and removes the entire misconfiguration problem.
 
 
-![[Screenshot_20231120_123913.png]]
+![trigger_demo](https://juan-lukeetapath.github.io/images/Workflow_trigger.png)
 
 ## Future
 
