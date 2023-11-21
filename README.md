@@ -15,25 +15,7 @@ For development we do the following:
 8. After this we merge the develop branch into the master branch handling stuff like re-basing and merge errors
 9. We deploy the master branch to production manually
 
-In git it looks like this
-```mermaid
-gitGraph
-  commit id: "latest push"
-  branch develop
-  checkout develop
-  branch feature
-  checkout feature
-  commit id: "Apply Bug Fix"
-  commit id: "Format code"
-  commit id: "Add Test"
-  checkout develop
-  merge feature id: "Merge feature into develop"
-  checkout main
-  merge develop id: "Merge develop into master"
-```
-
-
-It can also be represented like this
+Visual representation of the process:
 ```mermaid
 stateDiagram 
 	1.Develop --> 2.feature: Create a branch
@@ -67,7 +49,7 @@ I suggest we implement the following DevOps practices in order to improve the qu
 | Linting checks (ensures code formatting)                                                                    | Developer Experience / quality of code      | 4 hours               | No/Very little future work required              |
 | Automated tests (unit tests, integration tests)                                                              | System quality                              | 80+ hours             | Requires Devs to write tests for new features |
 | CI pipeline (automated Linting and tests)                                                                   | System quality                   | 4-8 hours             | Very little future work required              |
-| CD pipeline (automated build and deployment)                                                                | Deployment process                            | 16-20 hours           | Very little future work required              |
+| CD pipeline (automated build and deployment)                                                                | Deployment process                            | 4-8 hours           | Very little future work required              |
 
 Implementing those changes will cause our processes to look like this
 
@@ -79,7 +61,7 @@ CI or continues intergration is a pipeline that integrates into Version Control 
 
 ![Commit_demo](https://juan-lukeetapath.github.io/images/Commit.png)
 
-CD or continues delivery is a pipeline that also integrates into git, Github creates a virtual server which can download the dependencies and build the Android APK and IOS archive concurrently based on the code in the repo, additional we have it tag the code with a version, and communicates with Heroku (or any other service we use to deploy) that it should start deploying this new tagged version on specific environments. This means we can ensure the code that is being built has all the right configurations and has ran through the automated tests
+CD or continues delivery is a pipeline that also integrates into git, Github creates a virtual server which can download the dependencies and build the Android APK and IOS archive concurrently based on the code in the repo, additional we have it tag the code with a version, and communicates with Heroku (or any other service we use to deploy) that it should start deploying this new tagged version on specific environments. This means we can ensure the code that is being built has all the right configurations and removes the possibility of differences between local and remote branch as it uses the remote branches 
 
 
 ![trigger_demo](https://juan-lukeetapath.github.io/images/Workflow_trigger.png)
@@ -97,25 +79,7 @@ For development we can do the following:
 6. Tawona can take a look at implementation 
 7. We make those implementation changes and Tawona approves PR. The PR can then version the code and deploy the changes into production or Staging
 
-In git it looks like this
-```mermaid
-gitGraph
-  commit id: "latest push" tag: "v4.2.0"
-  branch develop
-  checkout develop
-  branch feature
-  checkout feature
-  commit id: "Apply Bug Fix"
-  commit id: "Format code"
-  commit id: "Add Test"
-  checkout develop
-  merge feature id: "PR feature on develop"
-  checkout main
-  merge develop id: "Pipeline syncs master branch" tag: "v4.2.1"
-```
-
-
-It can also be represented like this
+Visual representation of the process:
 ```mermaid
 stateDiagram 
 	1.Develop --> 2.feature: Create a branch
